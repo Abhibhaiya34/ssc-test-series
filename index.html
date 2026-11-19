@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSC CGL 2026 Tier-1 GK Test Series · Inspector Baba (1,325 Questions · 53 Shifts)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ================= TOP NAVBAR ================= -->
+  <header class="topbar" id="mainTopbar">
+    <div class="container topbar-inner">
+      <div class="brand" id="brandHomeBtn" role="button" tabindex="0">
+        <div class="brand-logo">IB</div>
+        <div class="brand-text">
+          <div class="brand-title">SSC CGL 2026 <span class="badge-tier">TIER-1 GK</span></div>
+          <div class="brand-sub">Inspector Baba · 53 Shifts · 1,325 हल प्रश्न</div>
+        </div>
+      </div>
+
+      <nav class="main-nav" id="mainNav">
+        <button class="nav-tab active" data-tab="subjects">
+          <span class="nav-icon">📚</span>
+          <span>विषय एवं टॉपिक <small>(10 · 124)</small></span>
+        </button>
+        <button class="nav-tab" data-tab="shifts">
+          <span class="nav-icon">📅</span>
+          <span>शिफ्ट-वार पेपर्स <small>(53 Shifts)</small></span>
+        </button>
+        <button class="nav-tab" data-tab="custom">
+          <span class="nav-icon">🎯</span>
+          <span>मॉक जनरेटर <small>(Custom)</small></span>
+        </button>
+        <button class="nav-tab" data-tab="qbank">
+          <span class="nav-icon">🔍</span>
+          <span>प्रश्न बैंक एवं बुकमार्क <small>(1,325)</small></span>
+        </button>
+        <button class="nav-tab" data-tab="analytics">
+          <span class="nav-icon">📊</span>
+          <span>रिपोर्ट एवं हिस्ट्री</span>
+        </button>
+      </nav>
+
+      <div class="topbar-actions">
+        <button class="icon-btn" id="quickSearchBtn" title="प्रश्न खोजें (Ctrl+K)">
+          <span>🔍</span>
+        </button>
+        <button class="icon-btn" id="themeToggleBtn" title="डार्क / लाइट मोड बदलें">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN DASHBOARD VIEW ================= -->
+  <main class="main-view" id="dashboardView">
+    <!-- Hero Banner & Live User Stats -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-left">
+            <div class="hero-pill">✨ SSC CGL 2026 · 30 Sep – 28 Oct 2026 · सभी 53 शिफ्टों का संपूर्ण संग्रह</div>
+            <h1 class="hero-heading">सामान्य अध्ययन (General Studies) <span class="text-gradient">CBT टेस्ट सीरीज़</span></h1>
+            <p class="hero-desc">
+              <strong>Inspector Baba</strong> की ई-बुक पर आधारित इंटरैक्टिव टेस्ट पोर्टल — असली SSC CBT एग्ज़ाम इंटरफ़ेस
+              (<code>+2.0</code> / <code>-0.5</code> मार्किंग, टाइमर, क्वेश्चन पैलेट) और <strong>4-Step प्रैक्टिस मोड</strong> (तुरंत उत्तर, विस्तृत व्याख्या एवं अतिरिक्त तथ्य) के साथ।
+            </p>
+            <div class="hero-cta-group">
+              <button class="btn btn-primary btn-lg" id="heroQuickMockBtn">
+                ⚡ फुल SSC GK मॉक टेस्ट (25 प्रश्न · 15 मिनट)
+              </button>
+              <button class="btn btn-secondary btn-lg" id="heroSmartPracticeBtn">
+                📖 4-Step प्रैक्टिस शुरू करें
+              </button>
+              <button class="btn btn-outline" id="heroWeakTestBtn">
+                🔥 गलत / अनअटेम्प्टेड प्रश्न टेस्ट
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-stats-grid">
+            <div class="stat-box">
+              <div class="stat-value" id="statSolved">0 <small>/ 1325</small></div>
+              <div class="stat-label">हल किए गए प्रश्न (Solved)</div>
+              <div class="mini-progress"><div class="mini-progress-bar" id="statSolvedBar" style="width:0%"></div></div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" id="statAccuracy">0%</div>
+              <div class="stat-label">सटीकता (Accuracy)</div>
+              <div class="stat-sub" id="statCorrectWrong">0 सही · 0 गलत</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" id="statTestsTaken">0</div>
+              <div class="stat-label">पूर्ण किए गए टेस्ट (Tests)</div>
+              <div class="stat-sub" id="statAvgScore">औसत स्कोर: --</div>
+            </div>
+            <div class="stat-box clickable" id="statBookmarksBox">
+              <div class="stat-value" id="statBookmarks">0 ⭐</div>
+              <div class="stat-label">बुकमार्क प्रश्न (Saved)</div>
+              <div class="stat-sub">रिवीजन के लिए क्लिक करें →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container content-container">
+      <!-- ================= TAB 1: SUBJECT & TOPIC-WISE ================= -->
+      <section class="tab-panel active" id="tab-subjects">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">📚 विषय एवं अध्याय-वार टेस्ट सीरीज़ (10 Subjects · 124 Topics)</h2>
+            <p class="section-subtitle">किसी भी विषय या टॉपिक को चुनें और असली CBT Exam Mode या 4-Step Practice Mode में हल करें</p>
+          </div>
+          <div class="section-controls">
+            <input type="text" id="topicSearchInput" class="input-search" placeholder="🔍 विषय या टॉपिक खोजें (उदा. खेल, संविधान, नृत्य)..." />
+            <button class="btn btn-sm btn-outline" id="expandAllSubjectsBtn">सभी टॉपिक खोलें</button>
+          </div>
+        </div>
+
+        <div class="subjects-list" id="subjectsListContainer"></div>
+      </section>
+
+      <!-- ================= TAB 2: SHIFT-WISE PYQ TESTS ================= -->
+      <section class="tab-panel" id="tab-shifts">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">📅 शिफ्ट-वार प्रश्न-पत्र (All 53 Official Shifts · 25 Questions Each)</h2>
+            <p class="section-subtitle">30 सितंबर 2026 से 28 अक्टूबर 2026 तक आयोजित सभी 53 शिफ्टों के असली GK पेपर्स (50 अंक · 15 मिनट)</p>
+          </div>
+          <div class="section-controls">
+            <input type="text" id="shiftSearchInput" class="input-search" placeholder="🔍 तारीख खोजें (उदा. 30 Sep, 14 Oct)..." />
+            <select id="shiftNumberFilter" class="select-control">
+              <option value="all">सभी शिफ्ट (Shift I, II, III)</option>
+              <option value="Shift-I">केवल Shift-I</option>
+              <option value="Shift-II">केवल Shift-II</option>
+              <option value="Shift-III">केवल Shift-III</option>
+            </select>
+            <select id="shiftStatusFilter" class="select-control">
+              <option value="all">सभी स्टेटस (All)</option>
+              <option value="attempted">हल किए गए (Attempted)</option>
+              <option value="unattempted">बाकी (Unattempted)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="shifts-grid" id="shiftsGridContainer"></div>
+      </section>
+
+      <!-- ================= TAB 3: CUSTOM MOCK GENERATOR ================= -->
+      <section class="tab-panel" id="tab-custom">
+        <div class="custom-builder-card">
+          <div class="custom-builder-header">
+            <h2>🎯 कस्टम मॉक टेस्ट एवं प्रैक्टिस जनरेटर</h2>
+            <p>अपनी तैयारी के अनुसार विषय, प्रश्नों की संख्या, समय-सीमा और कठिनाई फ़िल्टर चुनकर अपना टेस्ट खुद बनाएँ</p>
+          </div>
+
+          <div class="custom-form-grid">
+            <div class="form-group full-width">
+              <label class="form-label">1. विषय चुनें (Select Subjects)</label>
+              <div class="subject-checkbox-toolbar">
+                <button type="button" class="btn btn-xs btn-outline" id="selectAllSubjBtn">सभी चुनें (Select All)</button>
+                <button type="button" class="btn btn-xs btn-outline" id="deselectAllSubjBtn">सभी हटाएँ (Clear)</button>
+              </div>
+              <div class="subject-checkbox-grid" id="customSubjectCheckboxes"></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">2. प्रश्न फ़िल्टर (Question Pool)</label>
+              <select id="customPoolFilter" class="select-control full-width">
+                <option value="all">सभी प्रश्न (All 1,325 Questions)</option>
+                <option value="unattempted">केवल अनअटेम्प्टेड प्रश्न (Unattempted Only)</option>
+                <option value="incorrect">केवल गलत हुए प्रश्न (Incorrectly Answered Only)</option>
+                <option value="bookmarked">केवल बुकमार्क किए गए प्रश्न (Bookmarked ⭐ Only)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">3. प्रश्नों की संख्या (Number of Questions)</label>
+              <select id="customQuestionCount" class="select-control full-width">
+                <option value="10">10 प्रश्न (Quick Mini Quiz - 20 Marks)</option>
+                <option value="25" selected>25 प्रश्न (Official SSC CGL Tier-1 Pattern - 50 Marks)</option>
+                <option value="50">50 प्रश्न (Marathon Test - 100 Marks)</option>
+                <option value="100">100 प्रश्न (Mega Revision Test - 200 Marks)</option>
+                <option value="all">चयनित पूल के सभी प्रश्न (All Matching)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">4. समय सीमा (Time Limit)</label>
+              <select id="customTimeLimit" class="select-control full-width">
+                <option value="auto" selected>ऑटोमैटिक (36 सेकंड प्रति प्रश्न — 25 Q = 15 Min)</option>
+                <option value="10">10 मिनट</option>
+                <option value="15">15 मिनट</option>
+                <option value="20">20 मिनट</option>
+                <option value="30">30 मिनट</option>
+                <option value="60">60 मिनट</option>
+                <option value="0">कोई समय सीमा नहीं (Untimed)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">5. प्रश्नों का क्रम (Question Order)</label>
+              <select id="customShuffleMode" class="select-control full-width">
+                <option value="shuffle" selected>रैंडम शफ़ल (Randomly Shuffled)</option>
+                <option value="sequential">क्रमबद्ध (Chapter & Topic Order)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="custom-pool-summary" id="customPoolSummary">
+            चयनित फ़िल्टर में उपलब्ध प्रश्न: <strong>1,325</strong>
+          </div>
+
+          <div class="custom-actions">
+            <button class="btn btn-primary btn-lg" id="startCustomCbtBtn">
+              🖥️ CBT Exam Mode में शुरू करें
+            </button>
+            <button class="btn btn-secondary btn-lg" id="startCustomPracticeBtn">
+              📖 4-Step Practice Mode में शुरू करें
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 4: QUESTION BANK & BOOKMARKS ================= -->
+      <section class="tab-panel" id="tab-qbank">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">🔍 संपूर्ण प्रश्न बैंक एवं बुकमार्क रिवीजन (1,325 Questions)</h2>
+            <p class="section-subtitle">किसी भी शब्द, टॉपिक, शिफ्ट या बुकमार्क से प्रश्न खोजें और तुरंत उत्तर व व्याख्या देखें</p>
+          </div>
+          <div class="section-controls">
+            <button class="btn btn-primary btn-sm" id="testFilteredQBankBtn">
+              🖥️ फ़िल्टर किए गए प्रश्नों का टेस्ट लें
+            </button>
+            <button class="btn btn-secondary btn-sm" id="toggleAllQBankAnswersBtn">
+              👁️ सभी उत्तर दिखाएँ / छिपाएँ
+            </button>
+          </div>
+        </div>
+
+        <div class="qbank-filters-bar">
+          <input type="text" id="qbankSearchInput" class="input-search flex-grow" placeholder="🔍 प्रश्न, विकल्प या व्याख्या में कोई भी शब्द खोजें (उदा. अनुच्छेद, पंचवर्षीय, नोबेल, 2024)..." />
+          <select id="qbankSubjectFilter" class="select-control">
+            <option value="all">सभी 10 विषय (All Subjects)</option>
+          </select>
+          <select id="qbankTopicFilter" class="select-control">
+            <option value="all">सभी 124 टॉपिक (All Topics)</option>
+          </select>
+          <select id="qbankShiftFilter" class="select-control">
+            <option value="all">सभी 53 शिफ्ट (All Shifts)</option>
+          </select>
+          <select id="qbankStatusFilter" class="select-control">
+            <option value="all">सभी प्रश्न (1,325)</option>
+            <option value="bookmarked">⭐ केवल बुकमार्क (Bookmarked)</option>
+            <option value="correct">✅ सही हल किए गए (Correct)</option>
+            <option value="incorrect">❌ गलत हुए (Incorrect)</option>
+            <option value="unattempted">⚪ अनअटेम्प्टेड (Unattempted)</option>
+          </select>
+        </div>
+
+        <div class="qbank-meta-bar">
+          <span id="qbankResultCount">1,325 प्रश्न मिले</span>
+          <div class="pagination-controls" id="qbankPaginationTop"></div>
+        </div>
+
+        <div class="qbank-list" id="qbankListContainer"></div>
+
+        <div class="qbank-meta-bar bottom">
+          <span></span>
+          <div class="pagination-controls" id="qbankPaginationBottom"></div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 5: ANALYTICS & TEST HISTORY ================= -->
+      <section class="tab-panel" id="tab-analytics">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">📊 आपकी परफॉर्मेंस रिपोर्ट एवं टेस्ट हिस्ट्री</h2>
+            <p class="section-subtitle">सभी 10 विषयों में आपकी पकड़, सटीकता (Accuracy) और पिछले सभी टेस्ट अटेम्प्ट्स का विश्लेषण</p>
+          </div>
+          <div class="section-controls">
+            <button class="btn btn-outline btn-sm danger-text" id="resetAllDataBtn">
+              🗑️ प्रोग्रेस रीसेट करें
+            </button>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <h3>📈 विषय-वार मास्टरी एवं सटीकता (Subject-Wise Mastery)</h3>
+            <div class="subject-mastery-list" id="subjectMasteryList"></div>
+          </div>
+
+          <div class="analytics-card">
+            <h3>🕒 हाल ही में दिए गए टेस्ट (Recent Test Attempts)</h3>
+            <div class="test-history-list" id="testHistoryList"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ================= CBT EXAM & PRACTICE OVERLAY VIEW ================= -->
+  <div class="exam-overlay hidden" id="examOverlay">
+    <!-- Exam Top Header -->
+    <header class="exam-header">
+      <div class="exam-header-left">
+        <button class="btn btn-sm btn-ghost" id="exitExamBtn" title="टेस्ट से बाहर निकलें">
+          ✕ बाहर निकलें
+        </button>
+        <div class="exam-title-wrap">
+          <span class="exam-mode-badge" id="examModeBadge">CBT EXAM</span>
+          <h2 class="exam-title" id="examTitleText">SSC CGL 2026 Tier-1 Mock Test</h2>
+        </div>
+      </div>
+
+      <div class="exam-header-center">
+        <div class="marking-pill">
+          <span class="mark-pos">सही: +2.0</span>
+          <span class="mark-neg">गलत: -0.5</span>
+        </div>
+        <div class="timer-box" id="examTimerBox">
+          <span class="timer-icon">⏱️</span>
+          <span class="timer-text" id="examTimerText">15:00</span>
+          <button class="timer-pause-btn" id="pauseTimerBtn" title="टाइमर रोकें / चलाएँ">⏸️</button>
+        </div>
+      </div>
+
+      <div class="exam-header-right">
+        <div class="mode-switch-group">
+          <button class="btn btn-xs btn-outline" id="switchModeInExamBtn" title="CBT और Practice Mode के बीच स्विच करें">
+            📖 Practice Mode में बदलें
+          </button>
+        </div>
+        <div class="font-controls">
+          <button class="font-btn" id="fontDecBtn" title="फ़ॉन्ट छोटा करें">A-</button>
+          <button class="font-btn" id="fontIncBtn" title="फ़ॉन्ट बड़ा करें">A+</button>
+        </div>
+        <button class="btn btn-sm btn-outline mobile-palette-toggle" id="togglePaletteBtn">
+          🔢 पैलेट
+        </button>
+        <button class="btn btn-sm btn-success" id="submitExamTopBtn">
+          ✅ टेस्ट सबमिट करें
+        </button>
+      </div>
+    </header>
+
+    <!-- Exam Main Body -->
+    <div class="exam-body">
+      <!-- Left Question Area -->
+      <div class="exam-question-stage">
+        <div class="question-meta-bar">
+          <div class="q-meta-left">
+            <span class="q-number-pill" id="examQNumberPill">प्रश्न 1 / 25</span>
+            <span class="q-subject-tag" id="examQSubjectTag">स्टेटिक जी.के.</span>
+            <span class="q-topic-tag" id="examQTopicTag">टॉपिक 01: खेल</span>
+          </div>
+          <div class="q-meta-right">
+            <span class="q-shift-tag" id="examQShiftTag">📅 30 Sep 2026, Shift-II</span>
+            <span class="q-time-spent" id="examQTimeSpent">⏱️ 0s</span>
+            <button class="bookmark-btn" id="examBookmarkBtn" title="बुकमार्क करें (B)">
+              ☆ बुकमार्क
+            </button>
+          </div>
+        </div>
+
+        <div class="question-scroll-area" id="questionScrollArea">
+          <div class="question-card-box">
+            <div class="question-stem" id="examQuestionStem"></div>
+
+            <div class="options-container" id="examOptionsContainer"></div>
+
+            <!-- Instant Solution & 4-Step Box (Visible in Practice Mode or Review Mode) -->
+            <div class="instant-solution-box hidden" id="examInstantSolutionBox">
+              <div class="solution-header" id="instantSolutionBanner"></div>
+              <div class="solution-explanation">
+                <div class="sol-title">💡 विस्तृत व्याख्या (Detailed Solution):</div>
+                <div class="sol-text" id="instantExplanationText"></div>
+              </div>
+              <div class="solution-extra hidden" id="instantExtraBox">
+                <div class="extra-title">📌 अतिरिक्त महत्वपूर्ण तथ्य (Revision Booster):</div>
+                <ul class="extra-list" id="instantExtraList"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Action Bar -->
+        <footer class="exam-footer">
+          <div class="footer-left">
+            <button class="btn btn-outline" id="prevQuestionBtn">
+              ⬅️ पिछला (Prev)
+            </button>
+            <button class="btn btn-review" id="markReviewNextBtn">
+              🟣 समीक्षा हेतु चिह्नित करें (Mark & Next)
+            </button>
+            <button class="btn btn-ghost" id="clearResponseBtn">
+              🗑️ विकल्प हटाएँ (Clear)
+            </button>
+          </div>
+          <div class="footer-right">
+            <button class="btn btn-outline hidden" id="showPracticeAnswerBtn">
+              👁️ उत्तर एवं व्याख्या देखें
+            </button>
+            <button class="btn btn-primary btn-lg" id="saveNextBtn">
+              सेव एवं अगला (Save & Next) ➡️
+            </button>
+          </div>
+        </footer>
+      </div>
+
+      <!-- Right Question Palette Sidebar -->
+      <aside class="exam-palette-sidebar" id="examPaletteSidebar">
+        <div class="palette-legend">
+          <div class="legend-item">
+            <span class="p-badge answered" id="countAnswered">0</span>
+            <span>उत्तर दिया (Answered)</span>
+          </div>
+          <div class="legend-item">
+            <span class="p-badge not-answered" id="countNotAnswered">0</span>
+            <span>उत्तर नहीं दिया (Not Answered)</span>
+          </div>
+          <div class="legend-item">
+            <span class="p-badge not-visited" id="countNotVisited">0</span>
+            <span>नहीं देखा (Not Visited)</span>
+          </div>
+          <div class="legend-item">
+            <span class="p-badge marked" id="countMarked">0</span>
+            <span>समीक्षा हेतु (Marked)</span>
+          </div>
+          <div class="legend-item full-span">
+            <span class="p-badge answered-marked" id="countAnsweredMarked">0</span>
+            <span>उत्तर दिया व समीक्षा हेतु चिह्नित (मूल्यांकन में शामिल)</span>
+          </div>
+        </div>
+
+        <div class="palette-filter-bar">
+          <span class="palette-section-label">प्रश्न पैलेट (Question Palette)</span>
+          <select id="paletteFilterSelect" class="select-control select-xs">
+            <option value="all">सभी (All)</option>
+            <option value="answered">उत्तर दिए</option>
+            <option value="unanswered">बिना उत्तर</option>
+            <option value="marked">चिह्नित (Marked)</option>
+          </select>
+        </div>
+
+        <div class="palette-grid" id="examPaletteGrid"></div>
+
+        <div class="palette-footer">
+          <div class="keyboard-hint">
+            ⌨️ शॉर्टकट: <code>1-4</code> विकल्प · <code>←/→</code> प्रश्न बदलें · <code>B</code> बुकमार्क
+          </div>
+          <button class="btn btn-success full-width btn-lg" id="submitExamSidebarBtn">
+            ✅ टेस्ट सबमिट करें (Submit Test)
+          </button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ================= RESULT & SOLUTION REVIEW MODAL/VIEW ================= -->
+  <div class="result-overlay hidden" id="resultOverlay">
+    <header class="result-header">
+      <div class="container result-header-inner">
+        <div>
+          <span class="badge-tier">TEST REPORT & SOLUTIONS</span>
+          <h2 id="resultTestTitle">SSC CGL 2026 Tier-1 Mock Test</h2>
+        </div>
+        <div class="result-header-actions">
+          <button class="btn btn-outline" id="reattemptWrongBtn">
+            🔥 गलत/छूटे प्रश्नों का टेस्ट लें
+          </button>
+          <button class="btn btn-secondary" id="reattemptFullTestBtn">
+            🔄 टेस्ट दोबारा दें (Re-attempt)
+          </button>
+          <button class="btn btn-primary" id="closeResultBtn">
+            🏠 डैशबोर्ड पर वापस जाएँ
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="container result-body">
+      <!-- Scorecard Summary Grid -->
+      <div class="scorecard-grid">
+        <div class="score-hero-box">
+          <div class="score-label">आपका कुल स्कोर (Final Score)</div>
+          <div class="score-big" id="resFinalScore">0.00 <small>/ 50</small></div>
+          <div class="score-rank-pill" id="resPerformanceTag">शानदार प्रयास!</div>
+        </div>
+
+        <div class="score-stat-card">
+          <div class="s-icon">🎯</div>
+          <div class="s-val" id="resAccuracy">0%</div>
+          <div class="s-lbl">सटीकता (Accuracy)</div>
+        </div>
+
+        <div class="score-stat-card">
+          <div class="s-icon">📝</div>
+          <div class="s-val" id="resAttempted">0 / 25</div>
+          <div class="s-lbl">अटेम्प्ट किए (Attempted)</div>
+        </div>
+
+        <div class="score-stat-card success">
+          <div class="s-icon">✅</div>
+          <div class="s-val" id="resCorrect">0</div>
+          <div class="s-lbl">सही उत्तर (+2.0)</div>
+        </div>
+
+        <div class="score-stat-card danger">
+          <div class="s-icon">❌</div>
+          <div class="s-val" id="resIncorrect">0</div>
+          <div class="s-lbl">गलत उत्तर (-0.5)</div>
+        </div>
+
+        <div class="score-stat-card neutral">
+          <div class="s-icon">⏱️</div>
+          <div class="s-val" id="resTimeTaken">00:00</div>
+          <div class="s-lbl">कुल समय (Time Taken)</div>
+        </div>
+      </div>
+
+      <!-- Topic-wise Breakdown inside this Test -->
+      <div class="result-section-card">
+        <h3>📊 विषय एवं टॉपिक-वार प्रदर्शन (Topic-Wise Breakdown)</h3>
+        <div class="result-topic-table-wrap">
+          <table class="result-table">
+            <thead>
+              <tr>
+                <th>विषय / टॉपिक (Subject & Topic)</th>
+                <th>कुल प्रश्न</th>
+                <th>सही (✅)</th>
+                <th>गलत (❌)</th>
+                <th>छोड़े (⚪)</th>
+                <th>अंक (Score)</th>
+                <th>सटीकता</th>
+              </tr>
+            </thead>
+            <tbody id="resultTopicBreakdownBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Detailed Solutions Review with Filter -->
+      <div class="result-section-card">
+        <div class="solutions-review-header">
+          <h3>📖 प्रश्न-वार विस्तृत हल एवं व्याख्या (Detailed Solutions & Extra Facts)</h3>
+          <div class="solution-filter-pills" id="resultSolutionFilters">
+            <button class="pill-btn active" data-filter="all">सभी (<span id="resCountAll">0</span>)</button>
+            <button class="pill-btn" data-filter="correct">✅ सही (<span id="resCountCorrect">0</span>)</button>
+            <button class="pill-btn" data-filter="incorrect">❌ गलत (<span id="resCountIncorrect">0</span>)</button>
+            <button class="pill-btn" data-filter="unattempted">⚪ अनअटेम्प्टेड (<span id="resCountUnattempted">0</span>)</button>
+          </div>
+        </div>
+
+        <div class="solutions-list" id="resultSolutionsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SUBMIT CONFIRMATION MODAL ================= -->
+  <div class="modal-backdrop hidden" id="submitConfirmModal">
+    <div class="modal-card">
+      <h3>📋 क्या आप टेस्ट सबमिट करना चाहते हैं?</h3>
+      <p>सबमिट करने से पहले अपने अटेम्प्ट का सारांश देख लें:</p>
+      <div class="modal-summary-grid" id="submitModalSummary"></div>
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="cancelSubmitBtn">वापस टेस्ट पर जाएँ</button>
+        <button class="btn btn-success" id="confirmSubmitBtn">✅ हाँ, सबमिट करें और रिज़ल्ट देखें</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data/questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
